@@ -1,0 +1,42 @@
+﻿@page "/github"
+@page "/github/{userName}"
+@using WorkshopApp.Models
+
+@inject IGithubRepository Repository
+
+    <div class="form-group form-inline mt-2">
+        <input class="form-control" @bind="@UserName" />
+        <button class="btn btn-primary ml-2" @onclick="@SearchUser">Search</button>
+    </div>
+
+@if (UserInfo != null)
+{
+    <div class="card rounded p-3" style="width:18rem;">
+        <img class="card-img border-0 rounded-circle img-thumbnail" src="@UserInfo.AvatarUrl"/>
+        <div class="card-img-overlay">
+            <div class="card-title">
+                <a class="btn btn-dark" href="@UserInfo.Url" target="_blank" style="opacity:0.7;">@UserInfo.FullName</a>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    [ParameterAttribute]
+    string UserName { get; set; }
+
+    Models.UserInfo UserInfo { get; set; }
+
+    async Task SearchUser()
+    {
+        UserInfo = await Repository.GetUser(UserName);
+    }
+
+    protected async override Task OnInitAsync()
+    {
+        if (!string.IsNullOrWhiteSpace(UserName))
+        {
+            UserInfo = await Repository.GetUser(UserName);
+        }
+    }
+}

@@ -1,0 +1,39 @@
+@page "/list"
+@using WorkshopApp.Models
+
+<ul class="mt-1 list-unstyled">
+    @foreach (var item in Items)
+    {
+        <li class="form-inline mb-2">
+            <div class="form-group">
+                <input class="form-control" @key="item.Id" @bind="item.Text" />
+                <div class="ml-3 form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" @bind="item.IsSelected"/>
+                </div>
+            </div>
+        </li>
+    }
+</ul>
+<button class="btn btn-primary" @onclick="@AddNewItem">Add</button>
+
+<h2 class="mt-3">@Items.Count item(s)</h2>
+<ul class="list-group">
+    @foreach (var item in Items)
+    {
+        <li class="list-group-item @(item.IsSelected?"list-group-item-success":"")" @key="item.Id">@item.Text</li>
+    }
+</ul>
+
+@code {
+    int Counter = 0;
+    List<ListItem> Items = new List<ListItem>();
+
+    void AddNewItem()
+    {
+        Items.Add(new ListItem
+        {
+            Id = ++Counter,
+            Text = $"item {Counter}"
+        });
+    }
+}
