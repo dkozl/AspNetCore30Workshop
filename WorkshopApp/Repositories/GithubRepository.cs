@@ -1,6 +1,6 @@
 ﻿using System.Net.Http;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 using WorkshopApp.Models;
 
 namespace WorkshopApp.Repositories
@@ -22,7 +22,7 @@ namespace WorkshopApp.Repositories
 
             var json = await response.Content.ReadAsStringAsync();
 
-            return JsonConvert.DeserializeObject<UserInfo>(json);
+            return JsonSerializer.Parse<UserInfo>(json);
         }
     }
 }

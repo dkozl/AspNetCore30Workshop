@@ -1,22 +1,22 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace WorkshopApp.Models
 {
     public class UserInfo
     {
-        [JsonProperty("login")]
+        [JsonPropertyName("login")]
         public string Login { get; set; }
 
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string FullName { get; set; }
 
-        [JsonProperty("html_url")]
+        [JsonPropertyName("html_url")]
         public string Url { get; set; }
 
-        [JsonProperty("repos_url")]
+        [JsonPropertyName("repos_url")]
         public string ReposUrl { get; set; }
 
-        [JsonProperty("avatar_url")]
+        [JsonPropertyName("avatar_url")]
         public string AvatarUrl { get; set; }
     }
 }

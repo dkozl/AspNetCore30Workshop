@@ -1,0 +1,17 @@
+@inject IGithubRepository Repository
+
+
+@if (Data != null)
+{
+    <div class="card rounded p-3" style="width:18rem;">
+        <img class="card-img border-0 rounded-circle img-thumbnail" src="@Data.AvatarUrl" />
+        <div class="card-img-overlay">
+            <div class="card-title">
+                <a class="btn btn-dark" href="@Data.Url" target="_blank" style="opacity:0.7;">@Data.FullName</a>
+            </div>
+        </div>
+    </div>
+}
+
+ 
+ Data = await Repository.GetUser(UserName);
